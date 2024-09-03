@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 import './index.css';
+import { getWeatherByCity } from './api/weather';
 
 function App() {
   const [city, setCity] = useState('');
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
     setCity(event.target.value);
   };
 
-  const handleSearch = () => {
-    console.log(`Searching weather for ${city}`);
+  const handleSearch = async () => {
+    if (!city) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await getWeatherByCity(city);
+      setWeather(data);
+    } catch (err) {
+      setError('City not found. Please try again.');
+      setWeather(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,11 +44,19 @@ function App() {
           onClick={handleSearch}
           className="px-4 py-2 bg-white text-blue-600 font-semibold rounded-r-md hover:bg-gray-100 transition"
         >
-          Search
+          {loading ? 'Loading...' : 'Search'}
         </button>
       </div>
-      <div className="mt-8">
-        {/*  */}
+      <div className="weather-info mt-8 text-white text-center">
+        {error && <p className="text-red-500">{error}</p>}
+        {weather && (
+          <div className="bg-white bg-opacity-25 backdrop-filter backdrop-blur-lg p-6 rounded-md">
+            <h2 className="text-2xl font-semibold mb-2">
+              {weather.name}, {weather.sys.country}
+            </h2>
+            <p className="text-xl">{Math.round(weather.main.temp)}°C</p>
+          </div>
+        )}
       </div>
     </div>
   );
