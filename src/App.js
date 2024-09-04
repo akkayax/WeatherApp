@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './index.css';
 import { getWeatherByCity } from './api/weather';
+import WeatherInfo from './WeatherInfo';
 
 function App() {
   const [city, setCity] = useState('');
@@ -47,17 +48,7 @@ function App() {
           {loading ? 'Loading...' : 'Search'}
         </button>
       </div>
-      <div className="weather-info mt-8 text-white text-center">
-        {error && <p className="text-red-500">{error}</p>}
-        {weather && (
-          <div className="bg-white bg-opacity-25 backdrop-filter backdrop-blur-lg p-6 rounded-md">
-            <h2 className="text-2xl font-semibold mb-2">
-              {weather.name}, {weather.sys.country}
-            </h2>
-            <p className="text-xl">{Math.round(weather.main.temp)}°C</p>
-          </div>
-        )}
-      </div>
+      <WeatherInfo weather={weather} error={error} />
     </div>
   );
 }
