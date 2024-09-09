@@ -31,7 +31,7 @@ const WeatherInfo = ({ weather, error }) => {
                     <p className="text-lg">{weather.weather[0].main}</p>
                     <p className="italic mb-6 -mt-2">{weather.weather[0].description}</p>
 
-                    <div className="grid grid-cols-2 gap-x-12 gap-y-2 text-left">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 text-center md:text-left">
                         <p><strong>Min Temp:</strong> {Math.round(weather.main.temp_min)}°C</p>
                         <p><strong>Max Temp:</strong> {Math.round(weather.main.temp_max)}°C</p>
                         <p><img src="/images/sunrise.png" alt="Sunrise Icon" className='inline-block w-10' />: {formatTime(weather.sys.sunrise, weather.timezone)}</p>
