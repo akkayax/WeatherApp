@@ -14,6 +14,8 @@ function App() {
   };
 
   const handleSearch = async () => {
+    setCity('');
+
     if (!city) return;
 
     setLoading(true);
@@ -30,6 +32,12 @@ function App() {
     }
   };
 
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-purple-600 flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold text-white mb-6">WeatherApp</h1>
@@ -39,6 +47,7 @@ function App() {
           placeholder="Enter city name"
           value={city}
           onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
           className="px-4 py-2 rounded-l-md"
         />
         <button
