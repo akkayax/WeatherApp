@@ -34,10 +34,10 @@ const WeatherInfo = ({ weather, error }) => {
                     <div className="grid grid-cols-2 gap-x-12 gap-y-2 text-left">
                         <p><strong>Min Temp:</strong> {Math.round(weather.main.temp_min)}°C</p>
                         <p><strong>Max Temp:</strong> {Math.round(weather.main.temp_max)}°C</p>
-                        <p><strong>Sunrise:</strong> {formatTime(weather.sys.sunrise, weather.timezone)}</p>
-                        <p><strong>Sunset:</strong> {formatTime(weather.sys.sunset, weather.timezone)}</p>
-                        <p><strong>Humidity:</strong> {weather.main.humidity}%</p>
-                        <p><strong>Wind Speed:</strong> {weather.wind.speed} m/s</p>
+                        <p><img src="/images/sunrise.png" alt="Sunrise Icon" className='inline-block w-10' />: {formatTime(weather.sys.sunrise, weather.timezone)}</p>
+                        <p><img src="/images/sunset.png" alt="Sunset Icon" className='inline-block w-10' />: {formatTime(weather.sys.sunset, weather.timezone)}</p>
+                        <p><strong>Humidity</strong><img src="/images/humidity.png" alt="Humidity Icon" className='inline-block w-9' ></img>: {weather.main.humidity}%</p>
+                        <p><strong>Wind Speed</strong><img src="/images/wind.png" alt="Wind Icon" className='inline-block w-10' ></img>: {weather.wind.speed} m/s</p>
                         {weather.main.sea_level && <p><strong>Sea Level:</strong> {weather.main.sea_level} hPa</p>}
                         {weather.main.grnd_level && <p><strong>Ground Level:</strong> {weather.main.grnd_level} hPa</p>}
                     </div>
